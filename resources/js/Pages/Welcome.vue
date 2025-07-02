@@ -233,67 +233,69 @@ onMounted(() => {
     <Head title="Welcome" />
     <transition name="hologram">
         <div v-if="isLoading"
-            class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-gray-900 via-[#1a0933] to-[#0d011c] backdrop-blur-2xl">
-            <div class="text-center space-y-8">
-                <div class="relative mx-auto w-32 h-32">
-                    <div
-                        class="absolute inset-0 bg-[conic-gradient(from_180deg_at_50%_50%,hsl(189,100%,50%)_15%,hsl(295,100%,50%)_35%,transparent_60%)] rounded-full animate-spin shadow-[0_0_40px_-10px_rgba(147,51,234,0.5)]">
+            class="fixed inset-0 z-50 flex items-center justify-center bg-gradient-to-br from-[#0a021a] via-[#12042e] to-[#1b053a] backdrop-blur-3xl">
+
+            <div class="text-center space-y-10">
+                <div class="relative mx-auto w-40 h-40">
+                    <div class="absolute inset-0 rounded-full animate-spin
+          bg-[conic-gradient(from_180deg_at_50%_50%,#00e5ff_0%,#a855f7_40%,transparent_80%)]
+          shadow-[0_0_60px_-10px_rgba(168,85,247,0.6)]">
                     </div>
                     <div
-                        class="absolute inset-2 bg-gradient-to-br from-gray-900/80 to-purple-950/80 rounded-full backdrop-blur-xl border border-white/10">
+                        class="absolute inset-2 bg-gradient-to-br from-gray-900/70 to-purple-950/80 rounded-full backdrop-blur-2xl border border-white/10 shadow-[0_0_30px_5px_rgba(255,255,255,0.05)]">
                     </div>
                 </div>
-                <h2 class="text-4xl md:text-5xl font-bold tracking-wider animate-pulse">
-                    <span
-                        class="text-transparent bg-clip-text bg-[linear-gradient(90deg,theme(colors.cyan.400)_0%,theme(colors.purple.400)_50%,theme(colors.pink.400)_100%)] bg-[length:200%_auto] animate-text-glow">
+
+                <h2 class="text-5xl md:text-6xl font-light tracking-wide animate-pulse">
+                    <span class="text-transparent bg-clip-text bg-[linear-gradient(270deg,#00e5ff,#a855f7,#ec4899,#00e5ff)] 
+          bg-[length:300%_300%] animate-[gradientMove_4s_ease_infinite]">
                         {{ loadingText }}
                     </span>
                 </h2>
             </div>
+
         </div>
     </transition>
     <header
-        class="fixed top-0 left-0 w-full bg-gradient-to-br from-indigo-900/70 via-navy-800/50 to-cyan-900/30 backdrop-blur-3xl z-40 py-3 px-4 sm:px-6 transition-all duration-500 shadow-[0_8px_32px_0_rgba(0,0,0,0.5)] border-b border-indigo-400/20 hover:shadow-[0_12px_40px_0_rgba(16,94,245,0.2)] group/header">
+        class="fixed top-0 left-0 w-full bg-gradient-to-br from-indigo-950/80 via-navy-900/60 to-cyan-950/40 backdrop-blur-3xl z-40 py-3 px-4 sm:px-6 transition-all duration-500 shadow-[0_8px_40px_0_rgba(0,0,0,0.5)] border-b border-indigo-400/20 hover:shadow-[0_12px_50px_0_rgba(16,94,245,0.25)] group/header">
         <div class="flex justify-between items-center max-w-7xl mx-auto">
-            <div class="flex items-center space-x-2">
-                <div class="flex items-center justify-center relative">
+
+            <div class="flex items-center space-x-3">
+                <div class="relative flex items-center justify-center">
                     <div
-                        class="absolute inset-0 bg-gradient-to-r from-indigo-600 to-cyan-500 rounded-full opacity-20 blur-[30px] animate-pulse">
-                    </div>
-                    <div
-                        class="absolute inset-0 bg-gradient-to-r from-indigo-400/40 to-cyan-300/30 rounded-full opacity-15 blur-[15px] animate-spin-slow">
+                        class="absolute inset-0 rounded-full animate-pulse bg-[conic-gradient(from_180deg,#6366f1_0%,#22d3ee_60%,transparent_100%)] opacity-20 blur-[32px]">
                     </div>
                     <img :src="logoPath" alt="Logo"
-                        class="logo w-14 h-14 transform transition-all duration-500 hover:scale-110 hover:rotate-[8deg] border-2 border-indigo-400/30 rounded-full p-1 shadow-glow-blue">
+                        class="w-14 h-14 border-2 border-indigo-400/40 rounded-full p-1 shadow-[0_0_30px_rgba(14,165,233,0.4)] hover:scale-110 transition-all duration-500">
                 </div>
                 <span
-                    class="hidden sm:block text-transparent text-base font-semibold bg-clip-text bg-gradient-to-r from-indigo-200 to-cyan-400 tracking-wider">
-                    Polimericos Dial de Bolivia
+                    class="hidden sm:block text-transparent text-lg font-light bg-clip-text bg-gradient-to-r from-indigo-200 via-cyan-300 to-cyan-400 tracking-wide">
+                    Poliméricos Dial de Bolivia
                 </span>
             </div>
+
             <nav
-                class="flex items-center space-x-4 sm:space-x-6 bg-indigo-900/30 backdrop-blur-3xl py-2 px-4 sm:px-6 rounded-full shadow-neon-lg transition-all duration-500 border border-indigo-400/20 hover:border-cyan-300/30 relative before:absolute before:inset-0 before:bg-gradient-to-r before:from-indigo-500/20 before:via-transparent before:to-cyan-400/20 before:animate-shine before:-z-10">
-                <Link v-if="canLogin && !$page.props.auth.user" :href="route('login')"
-                    class="text-sm text-cyan-100 hover:text-white flex items-center justify-center px-3 py-2 rounded-lg border border-indigo-400/30 hover:border-cyan-300/50 bg-gradient-to-br from-indigo-900/50 to-cyan-900/30 hover:from-indigo-800/70 hover:to-cyan-800/50 transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-sm hover:shadow-glow-cyan group/btn">
-                <i class="fas fa-sign-in-alt mr-2 text-cyan-300 group-hover/btn:text-cyan-100"></i>Inicia sesión
+                class="flex items-center space-x-4 sm:space-x-6 bg-indigo-900/40 backdrop-blur-2xl py-2 px-4 sm:px-6 rounded-full border border-indigo-400/20 shadow-[0_0_30px_rgba(79,70,229,0.2)] transition-all duration-500 relative before:absolute before:inset-0 before:bg-gradient-to-r before:from-indigo-500/20 before:via-transparent before:to-cyan-400/20 before:animate-gradientX before:-z-10 rounded-full overflow-hidden">
+                <Link v-if="canLogin && !$page.props.auth.user" :href="route('login')">
+                <i class="fas fa-sign-in-alt mr-2 text-cyan-300"></i> Inicia sesión
                 </Link>
-                <Link v-if="canRegister && !$page.props.auth.user" :href="route('register')"
-                    class="text-sm text-cyan-100 hover:text-white flex items-center justify-center px-3 py-2 rounded-lg border border-indigo-400/30 hover:border-cyan-300/50 bg-gradient-to-br from-indigo-900/50 to-cyan-900/30 hover:from-indigo-800/70 hover:to-cyan-800/50 transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-sm hover:shadow-glow-cyan group/btn">
-                <i class="fas fa-user-plus mr-2 text-indigo-300 group-hover/btn:text-indigo-100"></i> Registrarse
+                <Link v-if="canRegister && !$page.props.auth.user" :href="route('register')">
+                <i class="fas fa-user-plus mr-2 text-indigo-300"></i> Registrarse
                 </Link>
-                <Link v-if="$page.props.auth.user" :href="route('dashboard')"
-                    class="text-sm text-cyan-100 hover:text-white flex items-center justify-center px-3 py-2 rounded-lg border border-indigo-400/30 hover:border-cyan-300/50 bg-gradient-to-br from-indigo-900/50 to-cyan-900/30 hover:from-indigo-800/70 hover:to-cyan-800/50 transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-sm hover:shadow-glow-cyan group/btn">
-                <i class="fas fa-tachometer-alt mr-2 text-green-300 group-hover/btn:text-green-100"></i> Ingresa al
-                Panel
+                <Link v-if="$page.props.auth.user" :href="route('dashboard')">
+                <i class="fas fa-tachometer-alt mr-2 text-green-300"></i> Ir al Panel
                 </Link>
             </nav>
+
         </div>
-        <div class="absolute inset-0 -z-10 opacity-20">
-            <div class="absolute w-2 h-2 bg-cyan-400/50 rounded-full top-1/4 left-1/4 animate-particle"></div>
+        <div class="absolute inset-0 -z-10 opacity-25 pointer-events-none">
+            <div class="absolute w-2 h-2 bg-cyan-400/60 rounded-full top-1/4 left-1/4 animate-particle"></div>
             <div class="absolute w-1.5 h-1.5 bg-indigo-400/50 rounded-full top-1/3 right-1/4 animate-particle-delay">
             </div>
+            <div class="absolute w-2 h-2 bg-cyan-300/50 rounded-full bottom-1/3 left-1/5 animate-particle-delay"></div>
         </div>
     </header>
+
     <main>
         <!-- Carrusel de imágenes mejorado -->
         <div class="relative w-full h-[35vh] sm:h-[75vh] md:h-[87vh] lg:h-[99vh] overflow-hidden group/carousel">
@@ -336,18 +338,28 @@ onMounted(() => {
         </div>
         <!-- Carrusel de Categorías -->
         <div class="mt-12 text-center relative px-4">
-            <h2 class="text-2xl md:text-4xl font-extrabold mb-8 relative group">
-                <span
-                    class="inline-block py-3 px-4 md:px-6 rounded-2xl bg-gradient-to-br from-black/80 via-blue-900/60 to-purple-900/70 backdrop-blur-xl backdrop-saturate-150 border border-white/10 border-b-white/20 shadow-[0_16px_32px_-10px_rgba(0,0,0,0.3)] hover:shadow-[0_24px_48px_-12px_rgb(45,45,245,0.4)] transition-all duration-300 hover:-translate-y-0.5">
-                    <span
-                        class="bg-gradient-to-r from-blue-400 via-purple-300 to-pink-300 bg-clip-text text-transparent animate-text-shine relative">
+            <h2
+                class="text-center w-full text-3xl md:text-5xl font-extrabold mb-12 relative group overflow-hidden rounded-3xl">
+                <span class="inline-block w-full py-5 px-6 md:px-8 rounded-3xl
+    bg-gradient-to-br from-white/5 via-white/10 to-white/5
+    backdrop-blur-2xl backdrop-saturate-200
+    border border-white/10 border-b-white/20
+    shadow-[0_8px_30px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.1)]
+    hover:shadow-[0_12px_50px_rgba(45,45,245,0.4),inset_0_2px_4px_rgba(255,255,255,0.1)]
+    transition-all duration-500 hover:-translate-y-0.5">
+                    <span class="bg-gradient-to-r from-white via-sky-200 to-pink-200
+      bg-clip-text text-transparent animate-text-shine
+      tracking-wide select-none relative">
                         Nuestras Categorías
-                        <span
-                            class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400/70 via-purple-400/70 to-pink-400/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 
+        bg-gradient-to-r from-sky-400 via-fuchsia-400 to-pink-400 
+        opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
                     </span>
                 </span>
-                <span
-                    class="absolute inset-0 -z-10 bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] from-blue-900/30 via-purple-900/30 to-pink-900/30 blur-2xl opacity-60 group-hover:opacity-80 transition-opacity duration-300"></span>
+                <span class="absolute inset-0 -z-10 bg-[conic-gradient(at_top_left,_var(--tw-gradient-stops))] 
+    from-sky-900/20 via-purple-900/20 to-pink-900/20 
+    blur-3xl opacity-60 group-hover:opacity-80 transition-opacity duration-500"></span>
             </h2>
             <div v-if="categoriasError"
                 class="text-center text-white bg-gradient-to-br from-red-500 to-black/50 p-4 rounded-lg shadow-lg">
@@ -367,7 +379,7 @@ onMounted(() => {
                             </h3>
                             <p v-if="categoria.parent" class="text-sm text-green-400 text-center mt-2">
                                 Subcategoría de <span class="font-bold text-green-500">{{ categoria.parent.nombre
-                                    }}</span>
+                                }}</span>
                             </p>
                         </div>
                         <div class="mt-4 bg-black/30 rounded-lg p-4 overflow-hidden">
@@ -387,7 +399,9 @@ onMounted(() => {
                         </button>
                     </div>
                 </div>
-                <div class="absolute top-1/2 left-0 right-0 transform -translate-y-1/2 flex justify-between px-6">
+                <div
+                    class="flex justify-center gap-6 mt-4
+         md:absolute md:top-1/2 md:left-0 md:right-0 md:transform md:-translate-y-1/2 md:flex md:justify-between md:px-6">
                     <button @click="prevCategories"
                         class="text-white bg-gradient-to-r from-gray-700 to-black/50 px-4 py-2 rounded-full text-xl shadow-lg hover:shadow-2xl transform transition-all duration-300"
                         :disabled="currentStartIndex <= 0">
@@ -404,12 +418,12 @@ onMounted(() => {
         <!-- Productos -->
         <div class="mt-12 text-center">
             <div class="mt-12 text-center">
-                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 p-6 
-           bg-gradient-to-br from-gray-950/95 via-gray-900/95 to-black/95 
-           backdrop-blur-2xl rounded-xl shadow-2xl border border-gray-800/40 
-           transition-all duration-300 hover:shadow-[0_0_25px_rgba(59,130,246,0.2)]">
+                <div class="flex flex-col sm:flex-row justify-between items-center mb-6 p-6
+    bg-white/10 backdrop-blur-lg rounded-2xl shadow-lg border border-white/10
+    transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.8)]
+    hover:backdrop-blur-2xl hover:bg-white/20">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-0 flex items-center gap-3">
-                        <i class="fas fa-store text-blue-400 animate-pulse"></i>
+                        <i class="fas fa-store text-gray-400 animate-pulse"></i>
                         Nuestros Productos
                         <span class="text-teal-400">({{ totalProductos }})</span>
                     </h2>
@@ -446,10 +460,13 @@ onMounted(() => {
                 No tenemos ese producto disponible.
             </div>
             <div v-else class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6 mb-8">
-                <div v-for="producto in productos" :key="producto.id" class="group relative bg-gradient-to-br from-gray-950/95 via-gray-900/95 to-black/95 
-           backdrop-blur-2xl rounded-xl shadow-xl p-5 
-           border border-gray-800/40 hover:border-gray-700/60
-           transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                <div v-for="producto in productos" :key="producto.id" class="group relative 
+    bg-gradient-to-br from-black/50 via-gray-900 to-black/30 
+    backdrop-blur-md rounded-2xl shadow-xl p-5 
+    border border-white/10 
+    hover:border-white/20 
+    transform transition-all duration-300 
+    hover:scale-105 hover:shadow-2xl">
                     <div class="relative aspect-square overflow-hidden rounded-lg mb-5">
                         <img :src="'/storage/' + producto.imagen_url" alt="Imagen del producto"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 shadow-md"
@@ -624,7 +641,7 @@ onMounted(() => {
     </footer>
 </template>
 <style>
-/*carga*/
+/* === Transiciones de carga === */
 .fade-enter-active,
 .fade-leave-active {
     transition: opacity 0.5s ease;
@@ -635,20 +652,31 @@ onMounted(() => {
     opacity: 0;
 }
 
-/*animaciones*/
+.hologram-enter-active,
+.hologram-leave-active {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hologram-enter-from,
+.hologram-leave-to {
+    opacity: 0;
+    filter: blur(20px);
+}
+
+/* === Fondo dinámico general === */
 body {
     background: linear-gradient(135deg,
-            #0d0d0d 0%,
-            #1a1a2e 20%,
-            #2b3a4f 40%,
-            #3e5c76 60%,
-            #1f2a44 80%,
-            #0d0d0d 100%);
+            rgb(18, 29, 45) 0%,
+            rgb(23, 38, 68) 20%,
+            rgb(48, 60, 76) 40%,
+            rgb(58, 98, 109) 60%,
+            rgb(23, 38, 68) 80%,
+            rgb(18, 29, 45) 100%);
     background-size: 300% 300%;
     animation: gradientFlow 15s ease infinite;
     margin: 0;
     font-family: 'Inter', 'Arial', sans-serif;
-    color: #ffffff;
+    color: rgb(51, 207, 250);
     overflow-x: hidden;
     position: relative;
 }
@@ -675,6 +703,7 @@ body {
     }
 }
 
+/* Partículas animadas en fondo */
 body::before,
 body::after {
     content: '';
@@ -687,15 +716,15 @@ body::after {
 }
 
 body::before {
-    background: radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+    background: radial-gradient(circle at 20% 30%, rgba(51, 207, 250, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(48, 60, 76, 0.1) 0%, transparent 50%);
     background-size: 150% 150%;
     animation: particleDrift 25s linear infinite;
     opacity: 0.4;
 }
 
 body::after {
-    background: radial-gradient(circle at 50% 50%, rgba(236, 72, 153, 0.05) 0%, transparent 70%);
+    background: radial-gradient(circle at 50% 50%, rgba(23, 38, 68, 0.05) 0%, transparent 70%);
     background-size: 200% 200%;
     animation: particleDriftReverse 20s linear infinite;
     opacity: 0.3;
@@ -729,30 +758,9 @@ body::after {
     }
 }
 
-.line-clamp-3 {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+/* === Animaciones y efectos personalizados === */
 
-@keyframes glowEffect {
-    0% {
-        box-shadow: 0 0 15px rgba(59, 130, 246, 0.2), 0 0 30px rgba(147, 197, 253, 0.1);
-    }
-
-    50% {
-        box-shadow: 0 0 25px rgba(59, 130, 246, 0.4), 0 0 50px rgba(147, 197, 253, 0.2);
-    }
-
-    100% {
-        box-shadow: 0 0 15px rgba(59, 130, 246, 0.2), 0 0 30px rgba(147, 197, 253, 0.1);
-    }
-}
-</style>
-<style>
-/*barra de navegacion animacion*/
+/* Botones con brillo dinámico */
 @keyframes shine {
     from {
         background-position: -200% 0;
@@ -763,6 +771,7 @@ body::after {
     }
 }
 
+/* Partículas individuales animadas */
 @keyframes particle {
     0% {
         transform: translateY(0) scale(1);
@@ -792,6 +801,41 @@ body::after {
     animation: particle 3s infinite linear 0.5s;
 }
 
+/* Loader circular lento */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin 15s linear infinite;
+}
+
+/* Texto con glow animado */
+@keyframes text-glow {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+        filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+    }
+
+    50% {
+        background-position: 100% 50%;
+        filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.5));
+    }
+}
+
+.animate-text-glow {
+    animation: text-glow 3s ease-in-out infinite;
+}
+
+/* === Sombras y utilidades personalizadas === */
 .shadow-neon-lg {
     box-shadow: 0 0 25px rgba(34, 138, 230, 0.1),
         0 4px 30px -5px rgba(16, 94, 245, 0.2),
@@ -812,47 +856,27 @@ body::after {
     background-color: #0a1929;
 }
 
-.animate-spin-slow {
-    animation: spin 15s linear infinite;
-}
-
-@keyframes spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-/*loader inicio*/
-@keyframes text-glow {
-
-    0%,
-    100% {
-        background-position: 0% 50%;
-        filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+/* Box glow animado */
+@keyframes glowEffect {
+    0% {
+        box-shadow: 0 0 15px rgba(51, 207, 250, 0.2), 0 0 30px rgba(48, 60, 76, 0.1);
     }
 
     50% {
-        background-position: 100% 50%;
-        filter: drop-shadow(0 0 20px rgba(147, 51, 234, 0.5));
+        box-shadow: 0 0 25px rgba(51, 207, 250, 0.4), 0 0 50px rgba(48, 60, 76, 0.2);
+    }
+
+    100% {
+        box-shadow: 0 0 15px rgba(51, 207, 250, 0.2), 0 0 30px rgba(48, 60, 76, 0.1);
     }
 }
 
-.animate-text-glow {
-    animation: text-glow 3s ease-in-out infinite;
-}
-
-.hologram-enter-active,
-.hologram-leave-active {
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hologram-enter-from,
-.hologram-leave-to {
-    opacity: 0;
-    filter: blur(20px);
+/* Clamp texto */
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 </style>
