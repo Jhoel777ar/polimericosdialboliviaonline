@@ -9,6 +9,7 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "biscolab/laravel-recaptcha": "^6.1",
+        "devonab/filament-easy-footer": "2.0",
         "filament/filament": "^3.2.57",
         "guzzlehttp/guzzle": "^7.9",
         "inertiajs/inertia-laravel": "^1.0",

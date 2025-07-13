@@ -19,6 +19,9 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Devonab\FilamentEasyFooter\EasyFooterPlugin;
+use Illuminate\Support\HtmlString;
+use Filament\Navigation\NavigationItem;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -36,6 +39,13 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Yellow,
                 'success' => Color::Emerald,
                 'warning' => Color::Orange,
+            ])
+            ->navigationItems([
+                NavigationItem::make('Su Pagina Principal')
+                    ->url('/')
+                    ->icon('heroicon-o-home')
+                    ->openUrlInNewTab()
+                    ->sort(0),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -62,6 +72,16 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
             ->plugins([
+                EasyFooterPlugin::make()
+                    ->withSentence(new HtmlString(
+                        '<img src="https://static.cdnlogo.com/logos/l/23/laravel.svg" style="margin-right:.5rem;" alt="Laravel Logo" width="20" height="20"> 
+        Poliméricos Dial Bolivia | Laravel v.11.x'
+                    ))
+                    ->withLoadTime('Se cargó en:')
+                    ->withLinks([
+                        ['title' => 'Soporte', 'url' => 'https://arkdev.pages.dev/nosotros'],
+                    ])
+                    ->withBorder(),
                 FilamentBackgroundsPlugin::make()
                     ->imageProvider(
                         MyImages::make()

@@ -64,7 +64,14 @@ class InicioImagenesResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('image_url'),
+                Tables\Columns\TextColumn::make('number')
+                    ->label('N°')
+                    ->state(function ($record, $livewire) {
+                        return ($livewire->getTableRecords()->search($record) + 1);
+                    }),
+                Tables\Columns\ImageColumn::make('image_url')
+                    ->label('Imagen inicio')
+                    ->openUrlInNewTab(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -79,6 +86,8 @@ class InicioImagenesResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

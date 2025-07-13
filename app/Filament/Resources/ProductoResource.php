@@ -13,6 +13,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Storage;
+use Filament\Forms\Components\Actions\Action;
 
 class ProductoResource extends Resource
 {
@@ -42,23 +43,66 @@ class ProductoResource extends Resource
                     ->maxLength(500),
                 Forms\Components\Select::make('categoria_id')
                     ->label('Categoría')
-                    ->options(\App\Models\Categoria::query()->pluck('nombre', 'id'))
+                    ->relationship('categoria', 'nombre') 
                     ->searchable()
                     ->required()
-                    ->placeholder('Seleccione una categoría'),
+                    ->placeholder('Seleccione una categoría')
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('nombre')
+                            ->label('Nombre de la categoría')
+                            ->required()
+                            ->maxLength(100)
+                            ->unique(ignoreRecord: true),
+
+                        Forms\Components\Textarea::make('descripcion')
+                            ->label('Descripción')
+                            ->maxLength(500),
+
+                        Forms\Components\FileUpload::make('imagen_url')
+                            ->label('Imagen de categoría')
+                            ->image()
+                            ->directory('categorias')
+                            ->disk('public')
+                            ->openable(),
+
+                        Forms\Components\Toggle::make('activo')
+                            ->label('Activo')
+                            ->default(true),
+                    ])
+                    ->createOptionAction(function (Action $action) {
+                        return $action
+                            ->modalHeading('Crear nueva categoría')
+                            ->modalSubmitActionLabel('Crear categoría')
+                            ->modalWidth('lg');
+                    }),
                 Forms\Components\TextInput::make('precio')
                     ->required()
-                    ->numeric(),
+                    ->numeric()
+                    ->numeric()
+                    ->minValue(1)
+                    ->suffix('Bs')
+                    ->default(1),
                 Forms\Components\TextInput::make('precio_estudiante')
                     ->label('Precio Estudiantes (Opcional)')
-                    ->numeric(),
+                    ->required()
+                    ->numeric()
+                    ->numeric()
+                    ->minValue(1)
+                    ->suffix('Bs')
+                    ->default(1),
                 Forms\Components\TextInput::make('precio_proveedor')
                     ->label('Precio Proveedores (Opcional)')
-                    ->numeric(),
+                    ->required()
+                    ->numeric()
+                    ->numeric()
+                    ->minValue(1)
+                    ->suffix('Bs')
+                    ->default(1),
                 Forms\Components\TextInput::make('stock')
                     ->required()
                     ->numeric()
-                    ->default(1),
+                    ->default(1)
+                    ->suffix('Unidades'),
                 Forms\Components\FileUpload::make('imagen_url')
                     ->image()
                     ->imageEditor()
@@ -93,15 +137,64 @@ class ProductoResource extends Resource
                     ->required(),
                 Forms\Components\Select::make('proveedor_id')
                     ->label('Proveedor')
-                    ->options(\App\Models\Proveedor::query()->pluck('nombre', 'id'))
+                    ->relationship('proveedor', 'nombre')
                     ->searchable()
                     ->required()
-                    ->placeholder('Seleccione un proveedor'),
+                    ->placeholder('Seleccione un proveedor')
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('nombre')
+                            ->label('Nombre del proveedor')
+                            ->required()
+                            ->maxLength(150),
+
+                        Forms\Components\TextInput::make('telefono')
+                            ->label('Teléfono')
+                            ->maxLength(20),
+
+                        Forms\Components\TextInput::make('correo')
+                            ->label('Correo electrónico')
+                            ->email()
+                            ->maxLength(150),
+
+                        Forms\Components\Textarea::make('direccion')
+                            ->label('Dirección')
+                            ->maxLength(500),
+                    ])
+                    ->createOptionAction(function (Action $action) {
+                        return $action
+                            ->modalHeading('Crear nuevo proveedor')
+                            ->modalSubmitActionLabel('Crear proveedor')
+                            ->modalWidth('lg');
+                    }),
                 Forms\Components\Select::make('color_id')
                     ->label('Color')
-                    ->options(\App\Models\Color::query()->pluck('color', 'id'))
+                    ->relationship('color', 'color')
                     ->searchable()
-                    ->placeholder('Seleccione un color'),
+                    ->getSearchResultsUsing(
+                        fn(string $search) =>
+                        \App\Models\Color::query()
+                            ->where('color', 'like', "%{$search}%")
+                            ->pluck('color', 'id')
+                            ->toArray()
+                    )
+                    ->getOptionLabelUsing(
+                        fn($value) =>
+                        \App\Models\Color::find($value)?->color
+                    )
+                    ->placeholder('Seleccione un color')
+                    ->createOptionForm([
+                        Forms\Components\TextInput::make('color')
+                            ->label('Nombre del color')
+                            ->required()
+                            ->maxLength(50)
+                            ->unique(ignoreRecord: true),
+                    ])
+                    ->createOptionAction(function (Action $action) {
+                        return $action
+                            ->modalHeading('Crear nuevo color')
+                            ->modalSubmitActionLabel('Crear color')
+                            ->modalWidth('lg');
+                    }),
                 Forms\Components\Select::make('activo')
                     ->options([
                         1 => 'Activo',

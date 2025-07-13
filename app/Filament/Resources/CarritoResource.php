@@ -30,33 +30,7 @@ class CarritoResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('ID_Usuario')
-                    ->relationship('usuario', 'name')
-                    ->required(),
-                Forms\Components\Select::make('ID_Producto')
-                    ->relationship('producto', 'nombre', function (Builder $query) {
-                        $query->where('stock', '>', 0);
-                    })
-                    ->required()
-                    ->label('Producto')
-                    ->reactive()
-                    ->afterStateUpdated(
-                        fn($state, callable $set) =>
-                        $set('stock_disponible', \App\Models\Producto::find($state)?->stock ?? 0)
-                    ),
-                Forms\Components\TextInput::make('stock_disponible')
-                    ->label('Stock Disponible')
-                    ->disabled(),
-                Forms\Components\TextInput::make('Cantidad')
-                    ->required()
-                    ->numeric()
-                    ->default(1)
-                    ->reactive()
-                    ->minValue(0)
-                    ->maxValue(fn(callable $get) => $get('stock_disponible') ?? 1)
-                    ->label('Cantidad'),
-                //Forms\Components\DateTimePicker::make('Fecha_Agregado')
-                //    ->required(),
+
             ]);
     }
 
