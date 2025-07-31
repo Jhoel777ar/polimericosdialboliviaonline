@@ -171,7 +171,11 @@ const logoPath = computed(() => "/storage/2333.jpg");
     </div>
 </template>
 
-<style scoped>
+<style>
+body {
+    @apply bg-black;
+}
+
 .animate-gradient-x {
     background-size: 200% 200%;
     animation: gradient-x 5s ease infinite;

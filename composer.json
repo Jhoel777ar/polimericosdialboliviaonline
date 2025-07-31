@@ -9,7 +9,7 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "biscolab/laravel-recaptcha": "^6.1",
-        "devonab/filament-easy-footer": "2.0",
+        "devonab/filament-easy-footer": "^1.0",
         "filament/filament": "^3.2.57",
         "guzzlehttp/guzzle": "^7.9",
         "inertiajs/inertia-laravel": "^1.0",
@@ -18,6 +18,7 @@
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.9",
+        "league/flysystem-aws-s3-v3": "3.0",
         "livewire/livewire": "^3.5",
         "swisnl/filament-backgrounds": "^1.1",
         "tightenco/ziggy": "^2.0"

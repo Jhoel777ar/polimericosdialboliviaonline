@@ -142,7 +142,11 @@ const sections = [
     </div>
 </template>
 
-<style scoped>
+<style>
+body {
+    @apply bg-black;
+}
+
 .animate-gradient-text {
     background-size: 200% 200%;
     animation: gradientText 5s ease infinite;
